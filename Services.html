@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services - Stackly Indian Cuisine</title>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" href="./Icons/images.jfif" />
+    <style>
+        /* Service Page Specific Styles */
+        .services-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('./Banners/chicken-skewers-with-slices-sweet-peppers-dill.webp');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            margin-bottom: 50px;
+        }
+
+        .services-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-intro {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .services-intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .services-intro p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .service-cards-container {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgb(0, 0, 0);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .service-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-card-img img {
+            transform: scale(1.1);
+        }
+
+        .service-card-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-card h3 i {
+            color: #ffcc00;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-features li i {
+            color: #ffcc00;
+            margin-right: 10px;
+        }
+
+        .service-cta {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .service-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ffcc00;
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #ffcc00;
+        }
+
+        .service-btn:hover {
+            background: transparent;
+            color: #ffcc00;
+        }
+
+        .pricing-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .pricing-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        .pricing-section p {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #ffcc00;
+        }
+
+        .pricing-card.popular {
+            position: relative;
+            border: 2px solid #ffcc00;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffcc00;
+            color: #333;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-features li i {
+            color: #ffcc00;
+            margin-right: 10px;
+        }
+
+        .process-section {
+            padding: 80px 20px;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .process-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+        }
+
+        .process-step {
+            background: rgb(0, 0, 0);
+            border-radius: 15px;
+            padding: 30px;
+            width: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffcc00;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .process-step i {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        .process-step h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .service-contact {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('./home1 offers/pic8.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .service-contact h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        .service-contact p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #ffcc00;
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #ffcc00;
+        }
+
+        .contact-btn:hover {
+            background: transparent;
+            color: #ffcc00;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .services-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .service-card {
+                flex-direction: column;
+            }
+            
+            .service-card-img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-hero {
+                height: 50vh;
+            }
+            
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-step {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR FROM HOME PAGE -->
+    <nav class="navbar">
+        <a class="logo" href="./index.html"
+          ><img
+            src="./Icons/Yellow Stackly.webp"
+            alt="Stackly Logo"
+            height="40px"
+            width="130px"
+        /></a>
+        <ul class="nav-links">
+          <li>
+            <div class="dropdown">
+              <a href="#" class="dropbtn">Home</a>
+              <div class="dropdown-options">
+                <a href="./index.html">Home 1</a>
+                <a href="./page2.html">Home 2</a>
+              </div>
+            </div>
+          </li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./Services.html" class="active">Services</a></li>
+          <li><a href="./FAQ.html">FAQ</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="./signup.html">Sign Up</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+
+    <!-- Services Hero Section -->
+    <section class="services-hero" data-aos="fade-down">
+        <div>
+            <h1>Our Premium Services</h1>
+            <p>Experience authentic Indian cuisine delivered with excellence. From catering to fast delivery, we serve your cravings with perfection.</p>
+        </div>
+    </section>
+
+    <!-- Services Intro -->
+    <section class="services-intro" data-aos="fade-up">
+        <div class="container">
+            <h2>Serving You With Excellence</h2>
+            <p>At Stackly, we go beyond just food delivery. Our comprehensive services are designed to provide you with an exceptional dining experience, whether you're enjoying our food at home, at work, or celebrating a special occasion.</p>
+        </div>
+    </section>
+
+    <!-- Service Cards -->
+    <section class="service-cards-container">
+        <div class="container">
+            <div class="row">
+                <!-- Fast Delivery Service -->
+                <div class="col-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-card-img">
+                            <img src="./home1 offers/pic1.webp" alt="Fast Delivery">
+                        </div>
+                        <div class="service-card-content">
+                            <h3><i class="fas fa-bolt"></i> Express Delivery</h3>
+                            <p>Get your favorite Indian dishes delivered hot and fresh right to your doorstep in under 30 minutes. Our dedicated delivery team ensures your food arrives perfectly.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> 30-minute delivery guarantee</li>
+                                <li><i class="fas fa-check"></i> Real-time order tracking</li>
+                                <li><i class="fas fa-check"></i> Contactless delivery option</li>
+                                <li><i class="fas fa-check"></i> Eco-friendly packaging</li>
+                            </ul>
+                            <div class="service-cta">
+                                <a href="./contact.html" class="service-btn">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catering Service -->
+                <div class="col-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-card-img">
+                            <img src="./home1 offers/pic4.webp" alt="Catering Service">
+                        </div>
+                        <div class="service-card-content">
+                            <h3><i class="fas fa-utensils"></i> Event Catering</h3>
+                            <p>Make your special occasions unforgettable with our authentic Indian catering services. From corporate events to weddings, we deliver flavors that delight.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Customized menu planning</li>
+                                <li><i class="fas fa-check"></i> Professional serving staff</li>
+                                <li><i class="fas fa-check"></i> Full-service setup and cleanup</li>
+                                <li><i class="fas fa-check"></i> Vegetarian & non-vegetarian options</li>
+                            </ul>
+                            <div class="service-cta">
+                                <a href="./contact.html" class="service-btn">Book Catering</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meal Plans -->
+                <div class="col-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-card-img">
+                            <img src="./home1 offers/pic6.webp" alt="Meal Plans">
+                        </div>
+                        <div class="service-card-content">
+                            <h3><i class="fas fa-calendar-alt"></i> Weekly Meal Plans</h3>
+                            <p>Simplify your life with our curated weekly meal plans. Enjoy delicious, balanced Indian meals without the hassle of cooking or meal prep.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Flexible subscription options</li>
+                                <li><i class="fas fa-check"></i> Nutritionally balanced meals</li>
+                                <li><i class="fas fa-check"></i> Dietary customization available</li>
+                                <li><i class="fas fa-check"></i> Free delivery on all meal plans</li>
+                            </ul>
+                            <div class="service-cta">
+                                <a href="./contact.html" class="service-btn">View Plans</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Cooking Classes -->
+                <div class="col-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-card-img">
+                            <img src="./home1 offers/pic7.webp" alt="Cooking Classes">
+                        </div>
+                        <div class="service-card-content">
+                            <h3><i class="fas fa-graduation-cap"></i> Cooking Classes</h3>
+                            <p>Learn the art of Indian cooking from our master chefs. Join our virtual or in-person classes to discover the secrets behind authentic Indian flavors.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Live online sessions</li>
+                                <li><i class="fas fa-check"></i> Small group workshops</li>
+                                <li><i class="fas fa-check"></i> Recipe books included</li>
+                                <li><i class="fas fa-check"></i> Ingredient kits available</li>
+                            </ul>
+                            <div class="service-cta">
+                                <a href="./contact.html" class="service-btn">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate Services -->
+                <div class="col-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-card-img">
+                            <img src="./home1 offers/pic3.webp" alt="Corporate Services">
+                        </div>
+                        <div class="service-card-content">
+                            <h3><i class="fas fa-building"></i> Corporate Services</h3>
+                            <p>Elevate your workplace dining with our corporate meal solutions. Keep your team happy and productive with delicious, nutritious Indian meals.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Bulk ordering discounts</li>
+                                <li><i class="fas fa-check"></i> Scheduled weekly deliveries</li>
+                                <li><i class="fas fa-check"></i> Customized corporate menus</li>
+                                <li><i class="fas fa-check"></i> Billing and invoicing solutions</li>
+                            </ul>
+                            <div class="service-cta">
+                                <a href="./contact.html" class="service-btn">Contact Sales</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Takeaway -->
+                <div class="col-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-card">
+                        <div class="service-card-img">
+                            <img src="./home1 offers/pic2.webp" alt="Takeaway Service">
+                        </div>
+                        <div class="service-card-content">
+                            <h3><i class="fas fa-shopping-bag"></i> Premium Takeaway</h3>
+                            <p>Enjoy restaurant-quality Indian food in the comfort of your home. Our takeaway service ensures your food is packed fresh and ready to enjoy.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Pre-order online or call</li>
+                                <li><i class="fas fa-check"></i> Curbside pickup available</li>
+                                <li><i class="fas fa-check"></i> Special family meal packs</li>
+                                <li><i class="fas fa-check"></i> Hot bag rentals for parties</li>
+                            </ul>
+                            <div class="service-cta">
+                                <a href="./contact.html" class="service-btn">Order Takeaway</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" data-aos="fade-up">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Choose the service plan that works best for you. All plans include our quality guarantee and customer support.</p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card" data-aos="zoom-in" data-aos-delay="100">
+                    <h3>Basic</h3>
+                    <div class="price">₹299<span>/month</span></div>
+                    <p>Perfect for individuals</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Free delivery on orders above ₹500</li>
+                        <li><i class="fas fa-check"></i> Basic customer support</li>
+                        <li><i class="fas fa-check"></i> 5% discount on all orders</li>
+                        <li><i class="fas fa-times"></i> No catering services</li>
+                    </ul>
+                    <a href="./signup.html" class="service-btn">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">₹699<span>/month</span></div>
+                    <p>Great for families</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Free delivery on all orders</li>
+                        <li><i class="fas fa-check"></i> Priority customer support</li>
+                        <li><i class="fas fa-check"></i> 15% discount on all orders</li>
+                        <li><i class="fas fa-check"></i> Basic catering discount</li>
+                    </ul>
+                    <a href="./signup.html" class="service-btn">Get Started</a>
+                </div>
+                
+                <div class="pricing-card" data-aos="zoom-in" data-aos-delay="300">
+                    <h3>Business</h3>
+                    <div class="price">₹1499<span>/month</span></div>
+                    <p>Ideal for offices & events</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Free delivery on all orders</li>
+                        <li><i class="fas fa-check"></i> 24/7 dedicated support</li>
+                        <li><i class="fas fa-check"></i> 25% discount on all orders</li>
+                        <li><i class="fas fa-check"></i> Premium catering services</li>
+                    </ul>
+                    <a href="./contact.html" class="service-btn">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" data-aos="fade-up">
+        <div class="container">
+            <h2>How It Works</h2>
+            <p>Getting your favorite Indian food has never been easier. Just follow these simple steps.</p>
+            
+            <div class="process-steps">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Place Your Order</h4>
+                    <p>Browse our menu and place your order online, via phone, or through our mobile app.</p>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-cookie-bite"></i>
+                    <h4>We Prepare Your Meal</h4>
+                    <p>Our expert chefs cook your food fresh using authentic recipes and premium ingredients.</p>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-shipping-fast"></i>
+                    <h4>Fast Delivery</h4>
+                    <p>Our delivery team brings your hot, fresh meal right to your doorstep in record time.</p>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">4</div>
+                    <i class="fas fa-utensils"></i>
+                    <h4>Enjoy Your Meal</h4>
+                    <p>Sit back, relax, and enjoy restaurant-quality Indian food in the comfort of your home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="service-contact" data-aos="fade-up">
+        <div class="container">
+            <h2>Ready to Experience Stackly Services?</h2>
+            <p>Whether you're planning a party, need regular meals, or want to learn Indian cooking, we're here to serve you with excellence and authentic flavors.</p>
+            <a href="./contact.html" class="contact-btn">Get In Touch Today</a>
+        </div>
+    </section>
+
+    <!-- FOOTER FROM HOME PAGE -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-container">
+          <div class="footer-section about">
+            <h3>Stackly</h3>
+            <p>
+              Experience the taste of authentic cuisine, served with love and
+              excellence. We're committed to providing memorable dining
+              experiences.
+            </p>
+            <div class="social-icons">
+              <a href="./404.html"><img src="./Icons/social_14047486f.webp" alt="FB" /></a>
+              <a href="./404.html"><img src="./Icons/instagram_2626270i.webp" alt="Insta" /></a>
+              <a href="./404.html"><img src="./Icons/twitter logo.webp" alt="Tw" /></a>
+              <a href="./404.html"><img src="./Icons/youtube logo.webp" alt="YT" /></a>
+            </div>
+          </div>
+          <div class="footer-section contact">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Spice Street, India</p>
+            <p><i class="fas fa-phone"></i> +91 9876543210</p>
+            <p><i class="fas fa-envelope"></i> Stackly@gmail.com</p>
+          </div>
+          <div class="footer-section hours">
+            <h4>Opening Hours</h4>
+            <p>Mon - Fri: 11am - 10pm</p>
+            <p>Sat - Sun: 10am - 11pm</p>
+            <p>Holidays: 12pm - 9pm</p>
+          </div>
+          <div class="footer-section links">
+            <h4>Quick Links</h4>
+            <p><a href="./about.html">About Us</a></p>
+            <p><a href="./Services.html">Our Services</a></p>
+            <p><a href="./FAQ.html">FAQ</a></p>
+            <p><a href="./contact.html">Contact</a></p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            © 2025 Stackly. All rights reserved. | Designed with
+            <i class="fas fa-heart" style="color: #ffcc00"></i>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+
+        hamburger.addEventListener("click", function (e) {
+            e.stopPropagation();
+            navLinks.classList.toggle("active");
+            hamburger.classList.toggle("active");
+        });
+
+        // Dropdown toggle (mobile only)
+        const dropBtns = document.querySelectorAll(".dropbtn");
+
+        dropBtns.forEach(btn => {
+            btn.addEventListener("click", function (e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.parentElement.classList.toggle("active");
+                }
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (e) {
+            if (
+                window.innerWidth <= 768 &&
+                !navLinks.contains(e.target) &&
+                !hamburger.contains(e.target)
+            ) {
+                navLinks.classList.remove("active");
+                hamburger.classList.remove("active");
+
+                document.querySelectorAll(".dropdown").forEach(d =>
+                    d.classList.remove("active")
+                );
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", function () {
+            const navbar = document.querySelector(".navbar");
+            navbar.classList.toggle("scrolled", window.scrollY > 50);
+        });
+
+        // AOS init
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+
+        // Additional animations for service cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all service cards for additional animations
+        document.querySelectorAll('.service-card, .pricing-card, .process-step').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

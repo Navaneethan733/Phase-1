@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ - Stackly Indian Cuisine</title>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" href="./Icons/images.jfif" />
+    <style>
+      /* FAQ Page Specific Styles */
+      .faq-hero {
+        position: relative;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url('./home1 offers/pic1.webp') center/cover no-repeat;
+      }
+      
+      .faq-hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        font-family: "Edu NSW ACT Cursive", cursive;
+        color: #ffcc00;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      
+      .faq-hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .hero-content {
+        transform: translateY(5rem);
+      }
+      
+      .faq-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 5rem 2rem;
+      }
+      
+      .faq-section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      
+      .faq-section-title h2 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+      
+      .faq-section-title h2::after {
+        content: '';
+        position: absolute;
+        width: 80px;
+        height: 3px;
+        background: #ffcc00;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .faq-section-title p {
+        color: #666;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .faq-categories {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+      
+      .faq-category-btn {
+        padding: 0.8rem 1.5rem;
+        background: #f5f5f5;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+      
+      .faq-category-btn:hover {
+        background: #ffcc00;
+        color: #333;
+        transform: translateY(-3px);
+      }
+      
+      .faq-category-btn.active {
+        background: #ffcc00;
+        color: #333;
+        box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+      }
+      
+      .faq-list {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      
+      .faq-item {
+        margin-bottom: 1rem;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+      
+      .faq-item:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      }
+      
+      .faq-question {
+        padding: 1.5rem;
+        background: #ffcc00;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      
+      .faq-question span {
+        color: #ffcc00;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+      
+      .faq-question.active span {
+        transform: rotate(45deg);
+      }
+      
+      .faq-answer {
+        padding: 0 1.5rem;
+        max-height: 0;
+        overflow: hidden;
+        background: #f9f9f9;
+        transition: all 0.5s ease;
+      }
+      
+      .faq-answer.active {
+        padding: 1.5rem;
+        max-height: 500px;
+      }
+      
+      .faq-answer p {
+        color: #555;
+        line-height: 1.6;
+      }
+      
+      .faq-answer ul {
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+      }
+      
+      .faq-answer li {
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+      
+      .faq-answer a {
+        color: #ff9900;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      
+      .faq-answer a:hover {
+        text-decoration: underline;
+      }
+      
+      .faq-contact-promo {
+        background: linear-gradient(135deg, #ffcc00, #ff9900);
+        padding: 3rem 2rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 4rem;
+        color: #333;
+        box-shadow: 0 10px 30px rgba(255, 153, 0, 0.2);
+      }
+      
+      .faq-contact-promo h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .faq-contact-promo p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .faq-contact-promo .btn {
+        background: #333;
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: all 0.3s ease;
+      }
+      
+      .faq-contact-promo .btn:hover {
+        background: #222;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .faq-hero h1 {
+          font-size: 2.5rem;
+        }
+        
+        .faq-hero p {
+          font-size: 1rem;
+          padding: 0 1rem;
+        }
+        
+        .faq-section-title h2 {
+          font-size: 2rem;
+        }
+        
+        .faq-question {
+          padding: 1.2rem;
+          font-size: 1rem;
+        }
+        
+        .faq-contact-promo {
+          padding: 2rem 1rem;
+        }
+        
+        .faq-contact-promo h3 {
+          font-size: 1.8rem;
+        }
+      }
+      
+      /* Animation classes */
+      .faq-item.animate-in {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .bounce {
+        animation: bounce 1s infinite;
+      }
+      
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR FROM CONTACT PAGE -->
+    <nav class="navbar">
+      <a class="logo" href="./index.html"
+        ><img
+          src="./Icons/Yellow Stackly.webp"
+          alt="Stackly Logo"
+          height="40px"
+          width="130px"
+      /></a>
+      <ul class="nav-links">
+        <li>
+          <div class="dropdown">
+            <a href="#" class="dropbtn">Home</a>
+            <div class="dropdown-options">
+              <a href="./index.html">Home 1</a>
+              <a href="./page2.html">Home 2</a>
+            </div>
+          </div>
+        </li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./Services.html">Services</a></li>
+        <li><a class="active" href="./FAQ.html">FAQ</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./signup.html">Sign Up</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <section class="faq-hero" data-aos="fade-down">
+      <div class="hero-content">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find quick answers to common questions about Stackly Indian Cuisine. Can't find what you're looking for? Contact us directly!</p>
+      </div>
+    </section>
+
+    <div class="faq-container">
+      <div class="faq-section-title" data-aos="fade-up">
+        <h2>How Can We Help?</h2>
+        <p>Browse through our frequently asked questions to find the information you need about our restaurant, ordering, delivery, and more.</p>
+      </div>
+
+      <div class="faq-categories" data-aos="fade-up" data-aos-delay="100">
+        <button class="faq-category-btn active" data-category="all">All Questions</button>
+        <button class="faq-category-btn" data-category="ordering">Ordering</button>
+        <button class="faq-category-btn" data-category="delivery">Delivery</button>
+        <button class="faq-category-btn" data-category="menu">Menu & Food</button>
+        <button class="faq-category-btn" data-category="payment">Payment</button>
+      </div>
+
+      <div class="faq-list">
+        <!-- Ordering FAQs -->
+        <div class="faq-item animate-in" data-category="ordering" data-aos="fade-up">
+          <div class="faq-question">
+            How can I place an order with Stackly?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>You can place an order with Stackly in three convenient ways:</p>
+            <ul>
+              <li>Online through our website (click "Order Now" button)</li>
+              <li>Via our mobile app (coming soon!)</li>
+              <li>By calling us directly at +91 9876543210</li>
+              <li>In-person at our restaurant location</li>
+            </ul>
+            <p>We recommend ordering online for the fastest experience and to track your order in real-time.</p>
+          </div>
+        </div>
+
+        <div class="faq-item animate-in" data-category="ordering" data-aos="fade-up">
+          <div class="faq-question">
+            What are your opening hours?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Our restaurant hours are:</p>
+            <ul>
+              <li><strong>Monday - Friday:</strong> 11:00 AM - 10:00 PM</li>
+              <li><strong>Saturday - Sunday:</strong> 10:00 AM - 11:00 PM</li>
+              <li><strong>Public Holidays:</strong> 12:00 PM - 9:00 PM</li>
+            </ul>
+            <p>Delivery hours may vary slightly during peak seasons. Kitchen closes 30 minutes before closing time for last orders.</p>
+          </div>
+        </div>
+
+        <!-- Delivery FAQs -->
+        <div class="faq-item animate-in" data-category="delivery" data-aos="fade-up">
+          <div class="faq-question">
+            What areas do you deliver to?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We currently deliver within a 10km radius of our restaurant located at 123 Spice Street, India. You can check if your address is within our delivery zone by entering your postal code during the checkout process on our website.</p>
+            <p>We're constantly expanding our delivery areas, so if you're currently outside our zone, check back with us in the future!</p>
+          </div>
+        </div>
+
+        <div class="faq-item animate-in" data-category="delivery" data-aos="fade-up">
+          <div class="faq-question">
+            How long does delivery usually take?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Our average delivery time is 30-45 minutes from when you place your order. However, during peak hours (weekends 6-9 PM, holidays) delivery may take up to 60 minutes.</p>
+            <p>We offer express delivery (under 30 minutes) for orders placed during non-peak hours. You'll receive an estimated delivery time when you place your order, along with real-time tracking.</p>
+          </div>
+        </div>
+
+        <!-- Menu & Food FAQs -->
+        <div class="faq-item animate-in" data-category="menu" data-aos="fade-up">
+          <div class="faq-question">
+            Do you offer vegetarian and vegan options?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! We have an extensive selection of vegetarian and vegan dishes. Our menu clearly marks all vegetarian (🟢) and vegan (🌱) options. Some of our popular plant-based dishes include:</p>
+            <ul>
+              <li>Vegetable Biryani</li>
+              <li>Chana Masala (vegan)</li>
+              <li>Aloo Gobi (vegan)</li>
+              <li>Dal Makhani (vegetarian)</li>
+              <li>Paneer Butter Masala (vegetarian)</li>
+            </ul>
+            <p>We can also customize most dishes to accommodate dietary preferences - just let us know in the special instructions when ordering.</p>
+          </div>
+        </div>
+
+        <div class="faq-item animate-in" data-category="menu" data-aos="fade-up">
+          <div class="faq-question">
+            Are your dishes very spicy? Can I adjust the spice level?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We offer customizable spice levels for all our dishes! When ordering, you can select from:</p>
+            <ul>
+              <li><strong>Mild:</strong> Perfect for those who prefer subtle flavors</li>
+              <li><strong>Medium:</strong> Our standard level with a balanced kick</li>
+              <li><strong>Hot:</strong> For spice lovers who enjoy the heat</li>
+              <li><strong>Extra Hot:</strong> Only for the brave!</li>
+            </ul>
+            <p>If you forget to specify, we'll prepare your dish at our standard medium level. Our chefs are experts at balancing flavors at every spice level.</p>
+          </div>
+        </div>
+
+        <!-- Payment FAQs -->
+        <div class="faq-item animate-in" data-category="payment" data-aos="fade-up">
+          <div class="faq-question">
+            What payment methods do you accept?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We accept various payment methods for your convenience:</p>
+            <ul>
+              <li>Credit/Debit Cards (Visa, MasterCard, American Express)</li>
+              <li>Digital Wallets (PayTM, Google Pay, PhonePe)</li>
+              <li>UPI Payments</li>
+              <li>Net Banking</li>
+              <li>Cash on Delivery (available for orders under ₹2000)</li>
+            </ul>
+            <p>All online payments are secured with 128-bit SSL encryption for your safety.</p>
+          </div>
+        </div>
+
+        <div class="faq-item animate-in" data-category="delivery" data-aos="fade-up">
+          <div class="faq-question">
+            Is there a minimum order amount for delivery?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, we have a minimum order amount of ₹300 for delivery. This helps us maintain our fast delivery service while keeping our prices competitive.</p>
+            <p>For orders below ₹300, you're welcome to place a takeaway order and pick it up from our restaurant. We also occasionally waive the minimum for first-time customers - check our promotions page for current offers!</p>
+          </div>
+        </div>
+
+        <div class="faq-item animate-in" data-category="ordering" data-aos="fade-up">
+          <div class="faq-question">
+            Can I modify or cancel my order after placing it?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>You can modify or cancel your order within 5 minutes of placing it. After that, our kitchen begins preparation and we cannot guarantee changes.</p>
+            <p>To request a modification or cancellation:</p>
+            <ol>
+              <li>Call us immediately at +91 9876543210</li>
+              <li>Provide your order number (sent to your email/phone)</li>
+              <li>Our customer service team will assist you</li>
+            </ol>
+            <p>If your order has already been dispatched for delivery, we won't be able to cancel it, but we'll do our best to accommodate any concerns.</p>
+          </div>
+        </div>
+
+        <div class="faq-item animate-in" data-category="menu" data-aos="fade-up">
+          <div class="faq-question">
+            Do you offer catering for events and parties?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely! We offer catering services for events ranging from intimate gatherings to large corporate functions. Our catering menu includes:</p>
+            <ul>
+              <li>Customizable buffet setups</li>
+              <li>Individual meal boxes</li>
+              <li>Live food counters (chaat, dosa, etc.)</li>
+              <li>Dessert stations</li>
+            </ul>
+            <p>For catering inquiries, please contact our events team at <a href="mailto:catering@stackly.com">catering@stackly.com</a> or call +91 9876543211 at least 72 hours before your event.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-contact-promo" data-aos="zoom-in">
+        <h3>Still Have Questions?</h3>
+        <p>We're here to help! If you couldn't find the answer you were looking for, our customer support team is just a click or call away.</p>
+        <a href="./contact.html" class="btn">Contact Us Now</a>
+      </div>
+    </div>
+
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-container">
+          <div class="footer-section about">
+            <h3>Stackly</h3>
+            <p>
+              Experience the taste of authentic cuisine, served with love and
+              excellence. We're committed to providing memorable dining
+              experiences.
+            </p>
+            <div class="social-icons">
+              <a href="./404.html"><img src="./Icons/social_14047486f.webp" alt="FB" /></a>
+              <a href="./404.html"><img src="./Icons/instagram_2626270i.webp" alt="Insta" /></a>
+              <a href="./404.html"><img src="./Icons/twitter logo.webp" alt="Tw" /></a>
+              <a href="./404.html"><img src="./Icons/youtube logo.webp" alt="YT" /></a>
+            </div>
+          </div>
+          <div class="footer-section contact">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Spice Street, India</p>
+            <p><i class="fas fa-phone"></i> +91 9876543210</p>
+            <p><i class="fas fa-envelope"></i> Stackly@gmail.com</p>
+          </div>
+          <div class="footer-section hours">
+            <h4>Opening Hours</h4>
+            <p>Mon - Fri: 11am - 10pm</p>
+            <p>Sat - Sun: 10am - 11pm</p>
+            <p>Holidays: 12pm - 9pm</p>
+          </div>
+          <div class="footer-section links">
+            <h4>Quick Links</h4>
+            <p><a href="./about.html">About Us</a></p>
+            <p><a href="./Services.html">Our Services</a></p>
+            <p><a href="./FAQ.html">FAQ</a></p>
+            <p><a href="./contact.html">Contact</a></p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            © 2025 Stackly. All rights reserved. | Designed with
+            <i class="fas fa-heart" style="color: #ffcc00"></i>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50
+      });
+      
+      // FAQ functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // FAQ accordion functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+          question.addEventListener('click', () => {
+            // Toggle active class on question
+            question.classList.toggle('active');
+            
+            // Toggle active class on answer
+            const answer = question.nextElementSibling;
+            answer.classList.toggle('active');
+            
+            // Close other FAQs (optional - remove if you want multiple open)
+            // faqQuestions.forEach(otherQuestion => {
+            //   if (otherQuestion !== question) {
+            //     otherQuestion.classList.remove('active');
+            //     otherQuestion.nextElementSibling.classList.remove('active');
+            //   }
+            // });
+          });
+        });
+        
+        // FAQ category filtering
+        const categoryBtns = document.querySelectorAll('.faq-category-btn');
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        categoryBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            // Update active button
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Get selected category
+            const selectedCategory = btn.getAttribute('data-category');
+            
+            // Show/hide FAQ items based on category
+            faqItems.forEach(item => {
+              const itemCategory = item.getAttribute('data-category');
+              
+              if (selectedCategory === 'all' || itemCategory === selectedCategory) {
+                item.style.display = 'block';
+                // Add animation when showing
+                item.classList.add('animate-in');
+              } else {
+                item.style.display = 'none';
+              }
+            });
+            
+            // Re-trigger AOS for newly visible items
+            setTimeout(() => {
+              AOS.refresh();
+            }, 300);
+          });
+        });
+        
+        // Mobile menu toggle (from original page)
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+
+        hamburger.addEventListener("click", function (e) {
+          e.stopPropagation();
+          navLinks.classList.toggle("active");
+          hamburger.classList.toggle("active");
+        });
+
+        // Dropdown toggle (mobile only)
+        const dropBtns = document.querySelectorAll(".dropbtn");
+
+        dropBtns.forEach(btn => {
+          btn.addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              e.stopPropagation();
+              this.parentElement.classList.toggle("active");
+            }
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (e) {
+          if (
+            window.innerWidth <= 768 &&
+            !navLinks.contains(e.target) &&
+            !hamburger.contains(e.target)
+          ) {
+            navLinks.classList.remove("active");
+            hamburger.classList.remove("active");
+
+            document.querySelectorAll(".dropdown").forEach(d =>
+              d.classList.remove("active")
+            );
+          }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", function () {
+          const navbar = document.querySelector(".navbar");
+          navbar.classList.toggle("scrolled", window.scrollY > 50);
+        });
+        
+        // Add bounce animation to category buttons on hover
+        categoryBtns.forEach(btn => {
+          btn.addEventListener('mouseenter', function() {
+            this.classList.add('bounce');
+          });
+          
+          btn.addEventListener('mouseleave', function() {
+            this.classList.remove('bounce');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
