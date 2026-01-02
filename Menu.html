@@ -1027,6 +1027,17 @@
       <p>Explore authentic Indian flavors crafted with passion and tradition</p>
     </section>
 
+    <!-- Search Bar -->
+    <div class="search-container" data-aos="fade-up">
+      <i class="fas fa-search search-icon"></i>
+      <input 
+        type="text" 
+        class="search-box" 
+        id="searchBox"
+        placeholder="Search for dishes, drinks, or categories..."
+      />
+    </div>
+
     <!-- Filter Buttons -->
     <div class="filter-section" data-aos="fade-up">
       <button class="filter-btn active" data-category="all">
@@ -1363,56 +1374,6 @@
           localStorage.setItem('stacklyCart', JSON.stringify(cart));
         }
 
-        // Load cart from localStorage
-        function loadCart() {
-          // Update all menu items with cart quantities
-          menuItems.forEach(item => {
-            const itemName = item.dataset.name;
-            const cartItem = cart.find(i => i.name === itemName);
-            
-            if (cartItem) {
-              const qtySpan = item.querySelector('.qty');
-              const addBtn = item.querySelector('.add-to-cart-btn');
-              
-              qtySpan.textContent = cartItem.qty;
-              item.querySelector('.decrease').disabled = cartItem.qty === 0;
-              
-              // Update button text
-              if (cartItem.qty > 0) {
-                addBtn.textContent = `Added (${cartItem.qty})`;
-                addBtn.classList.add('added');
-              }
-            }
-          });
-          
-          updateCartBadge();
-          updateCartModal();
-        }
-
-        // Update cart item
-        function updateCart(name, price, qty) {
-          const existingIndex = cart.findIndex(item => item.name === name);
-
-          if (qty === 0) {
-            if (existingIndex !== -1) {
-              cart.splice(existingIndex, 1);
-              showToast(`${name} removed from cart`);
-            }
-          } else {
-            if (existingIndex !== -1) {
-              cart[existingIndex].qty = qty;
-              showToast(`${name} quantity updated to ${qty}`);
-            } else {
-              cart.push({ name, price, qty });
-              showToast(`${name} added to cart`);
-            }
-          }
-          
-          saveCart();
-          updateCartBadge();
-          updateCartModal();
-        }
-
         // Update cart modal
         function updateCartModal() {
           if (cart.length === 0) {
@@ -1460,19 +1421,26 @@
           document.querySelectorAll('.remove-item').forEach(button => {
             button.addEventListener('click', function() {
               const itemName = this.dataset.name;
-              const menuItem = document.querySelector(`.menu-item[data-name="${itemName}"]`);
               
+              // Find and update the corresponding menu item
+              const menuItem = document.querySelector(`.menu-item[data-name="${itemName}"]`);
               if (menuItem) {
                 const qtySpan = menuItem.querySelector('.qty');
                 const addBtn = menuItem.querySelector('.add-to-cart-btn');
+                const decBtn = menuItem.querySelector('.decrease');
                 
                 qtySpan.textContent = '0';
-                menuItem.querySelector('.decrease').disabled = true;
-                addBtn.textContent = 'Add to Cart';
+                decBtn.disabled = true;
+                addBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
                 addBtn.classList.remove('added');
               }
               
-              updateCart(itemName, 0, 0);
+              // Remove from cart
+              cart = cart.filter(item => item.name !== itemName);
+              saveCart();
+              updateCartBadge();
+              updateCartModal();
+              showToast(`${itemName} removed from cart`);
             });
           });
 
@@ -1556,77 +1524,92 @@
         menuItems.forEach((item) => {
           const name = item.dataset.name;
           const price = parseInt(item.dataset.price, 10);
+          
           const qtySpan = item.querySelector(".qty");
           const incBtn = item.querySelector(".increase");
           const decBtn = item.querySelector(".decrease");
-          const addToCartBtn = item.querySelector(".add-to-cart-btn");
+          const addBtn = item.querySelector(".add-to-cart-btn");
 
-          // Check if this item exists in cart
-          const existingItem = cart.find(item => item.name === name);
-          let qty = existingItem ? existingItem.qty : 0;
-          qtySpan.textContent = qty;
-          
-          // Update button text
-          if (qty > 0) {
-            addToCartBtn.textContent = `Added (${qty})`;
-            addToCartBtn.classList.add('added');
+          // Initialize quantity from cart
+          let currentQty = 0;
+          const cartItem = cart.find(i => i.name === name);
+          if (cartItem) {
+            currentQty = cartItem.qty;
           }
-          
-          updateButtons();
+
+          // Update display
+          function updateDisplay() {
+            qtySpan.textContent = currentQty;
+            decBtn.disabled = currentQty === 0;
+            
+            if (currentQty > 0) {
+              addBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Added (${currentQty})`;
+              addBtn.classList.add("added");
+            } else {
+              addBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add to Cart`;
+              addBtn.classList.remove("added");
+            }
+          }
+
+          // Update cart
+          function updateCart() {
+            const existingIndex = cart.findIndex(i => i.name === name);
+            
+            if (currentQty === 0) {
+              // Remove from cart if quantity is 0
+              if (existingIndex !== -1) {
+                cart.splice(existingIndex, 1);
+              }
+            } else {
+              // Update or add to cart
+              if (existingIndex !== -1) {
+                cart[existingIndex].qty = currentQty;
+              } else {
+                cart.push({ name, price, qty: currentQty });
+              }
+            }
+            
+            saveCart();
+            updateCartBadge();
+            updateCartModal();
+          }
 
           // Increase button
           incBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            qty++;
-            qtySpan.textContent = qty;
-            updateButtons();
-            updateCart(name, price, qty);
-            
-            // Update "Add to Cart" button
-            addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Added (${qty})`;
-            addToCartBtn.classList.add('added');
+            currentQty++;
+            updateDisplay();
+            updateCart();
+            showToast(`${name} added`);
           });
 
           // Decrease button
           decBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            if (qty > 0) {
-              qty--;
-              qtySpan.textContent = qty;
-              updateButtons();
-              updateCart(name, price, qty);
-              
-              // Update "Add to Cart" button
-              if (qty > 0) {
-                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Added (${qty})`;
-                addToCartBtn.classList.add('added');
-              } else {
-                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add to Cart`;
-                addToCartBtn.classList.remove('added');
-              }
+            if (currentQty > 0) {
+              currentQty--;
+              updateDisplay();
+              updateCart();
+              showToast(`${name} updated`);
             }
           });
 
-          // Add to Cart button (quick add 1)
-          addToCartBtn.addEventListener("click", (e) => {
+          // Add to Cart button
+          addBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            if (qty === 0) {
-              qty = 1;
-              qtySpan.textContent = qty;
-              updateButtons();
-              updateCart(name, price, qty);
-              
-              // Update button text
-              addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Added (${qty})`;
-              addToCartBtn.classList.add('added');
-            }
+            currentQty++;
+            updateDisplay();
+            updateCart();
+            showToast(`${name} added to cart`);
           });
 
-          function updateButtons() {
-            decBtn.disabled = qty === 0;
-            decBtn.innerHTML = qty === 0 ? '<i class="fas fa-minus"></i>' : '<i class="fas fa-minus"></i>';
-          }
+          // Initial display
+          updateDisplay();
         });
+
+        // Load cart on page load
+        updateCartBadge();
+        updateCartModal();
 
         // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
@@ -1643,7 +1626,9 @@
           }
         });
 
-        // Clear cart button (optional - you can add this)
+        // Clear cart button (optional - you can add this if needed)
+        // Uncomment the code below if you want a clear cart button in the modal
+        /*
         const clearCartBtn = document.createElement('button');
         clearCartBtn.textContent = 'Clear Cart';
         clearCartBtn.className = 'filter-btn';
@@ -1654,13 +1639,28 @@
           if (confirm('Are you sure you want to clear your cart?')) {
             cart = [];
             saveCart();
-            loadCart();
+            updateCartBadge();
+            updateCartModal();
+            
+            // Reset all menu items
+            menuItems.forEach(item => {
+              const qtySpan = item.querySelector('.qty');
+              const addBtn = item.querySelector('.add-to-cart-btn');
+              const decBtn = item.querySelector('.decrease');
+              
+              qtySpan.textContent = '0';
+              decBtn.disabled = true;
+              addBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+              addBtn.classList.remove('added');
+            });
+            
             showToast('Cart cleared');
           }
         });
-
-        // Load cart on page load
-        loadCart();
+        
+        // Add to cart footer if you want it
+        // cartFooter.appendChild(clearCartBtn);
+        */
       });
     </script>
   </body>
