@@ -973,6 +973,7 @@
       color: #ddd;
     }
     
+    /* FIXED: Social Icons Styles */
     .social-icons {
       display: flex;
       gap: 15px;
@@ -1014,10 +1015,26 @@
       position: relative;
       z-index: 1;
       transition: color 0.3s ease;
+      color: white;
     }
     
     .social-icons a:hover i {
       color: #000;
+    }
+    
+    /* Styles for image icons (if you use images instead of Font Awesome) */
+    .social-icons a img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      filter: brightness(0) invert(1); /* Makes icons white */
+      transition: filter 0.3s ease;
+    }
+    
+    .social-icons a:hover img {
+      filter: brightness(0) invert(0); /* Makes icons black on hover */
     }
     
     .footer-bottom {
@@ -1466,7 +1483,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer with FIXED Social Icons -->
   <footer id="contact">
     <div class="container">
       <div class="footer-container">
@@ -1474,10 +1491,10 @@
           <h3>Stackly</h3>
           <p>Experience the taste of authentic cuisine, served with love and excellence. We're committed to providing memorable dining experiences.</p>
           <div class="social-icons">
-           <a href="./404.html"><img src="./Icons/social_14047486f.webp" alt="FB" /></a>
-              <a href="./404.html"><img src="./Icons/instagram_2626270i.webp" alt="Insta" /></a>
-              <a href="./404.html"><img src="./Icons/twitter logo.webp" alt="Tw" /></a>
-              <a href="./404.html"><img src="./Icons/youtube logo.webp" alt="YT" /></a>
+            <a href="./404.html"><i class="fab fa-facebook-f"></i></a>
+            <a href="./404.html"><i class="fab fa-instagram"></i></a>
+            <a href="./404.html"><i class="fab fa-twitter"></i></a>
+            <a href="./404.html"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
         <div class="footer-section contact">
@@ -1613,7 +1630,7 @@
       {
         name: "Rajesh Kumar",
         text: "The food here is absolutely incredible! Every dish is packed with flavor and made with such care. The ambiance is perfect for both casual dinners and special occasions.",
-        image: "https://randomuser.me/api/portraits/men/32.jpg"
+        image: "./Chef/75.webp"
       },
       {
         name: "Priya Sharma",
